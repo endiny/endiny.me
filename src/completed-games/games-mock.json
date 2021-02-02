@@ -1,0 +1,17 @@
+[
+	{
+		"id": "1",
+		"name": "Game 1",
+		"score": 5
+	},
+	{
+		"id": "2",
+		"name": "Game 2",
+		"score": 6
+	},
+	{
+		"id": "3",
+		"name": "Game 3",
+		"score": 7
+	}
+]
