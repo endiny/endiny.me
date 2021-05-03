@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { CompletedGamesRoute } from './completed-games/Route';
-import Home from "./home/Home";
+import {Home} from "./home/Home";
 
 enum ROUTES {
   HOME = "/",
   COMPLETED_GAMES = "/games",
 }
 
-export function Router() {
+export function Routes() {
   return (
     <BrowserRouter>
       <Switch>
