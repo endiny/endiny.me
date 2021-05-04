@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-import gamesMock from "./games-mock.json";
+const BASE_URL = 'https://us-central1-endiny-me.cloudfunctions.net';
 
 export interface CompletedGame {
   id: string;
@@ -27,7 +27,7 @@ export class CompletedGamesStore {
   async loadGamesList() {
     this.setIsFetching(true);
     this.setGamesList(
-      await new Promise((resolve) => setTimeout(() => resolve(gamesMock), 1000))
+      await (await fetch(`${BASE_URL}/getGamesList`)).json()
     );
     this.setIsFetching(false);
   }
