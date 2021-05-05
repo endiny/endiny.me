@@ -1,4 +1,4 @@
-import { Table } from "../utils/table/Table";
+import { Table } from "../shared/table/Table";
 import { CompletedGame } from "./completed-games.store";
 
 const GAME_TABLE_COLUMNS = ["ID", "Name", "Score"];
