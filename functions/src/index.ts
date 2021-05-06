@@ -7,3 +7,4 @@ admin.initializeApp(functions.config().firebase);
 // // https://firebase.google.com/docs/functions/typescript
 
 export * from "./games-list";
+export * from "./twitch/twitch-auth";

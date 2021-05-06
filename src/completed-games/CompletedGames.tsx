@@ -1,11 +1,11 @@
-import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
-import { useStore } from "../stores";
-import { Spinner } from "../utils/Spinner";
-import { GamesTable } from "./GamesTable";
+import {observer} from 'mobx-react-lite';
+import React, {useEffect} from 'react';
+import {useStore} from '../stores';
+import {Spinner} from '../shared/Spinner';
+import {GamesTable} from './GamesTable';
 
 const CompletedGames = observer(function CompletedGames(): JSX.Element {
-  const { completedGamesStore } = useStore();
+  const {completedGamesStore} = useStore();
 
   useEffect(() => {
     (async () => {
