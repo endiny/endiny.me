@@ -1,5 +1,5 @@
-import { makeAutoObservable } from 'mobx';
-import { TwitchTokens, TwitchUser } from '../twitch/types';
+import {makeAutoObservable} from 'mobx';
+import {TwitchTokens, TwitchUser} from '../twitch/types';
 
 interface AuthCredentials {
   clientId: string;
@@ -14,6 +14,7 @@ interface AuthResponse {
 export class AuthStore {
   private _token: TwitchTokens | null = null;
   private _user: TwitchUser | null = null;
+  private _isLoading: boolean = false;
 
   private readonly authCredentials: AuthCredentials = {
     clientId: 'r7k7wawcxo5oey9mahxmy007jl916z',
@@ -22,6 +23,15 @@ export class AuthStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    const credsJson = localStorage.getItem('creds');
+    if (credsJson != null) {
+      try {
+        const {user, tokens} = JSON.parse(credsJson);
+        this.setTokens(tokens);
+        this.setUser(user);
+      } catch {}
+    }
   }
 
   get token(): TwitchTokens | null {
@@ -32,6 +42,10 @@ export class AuthStore {
     return this._user;
   }
 
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+
   setTokens(token: TwitchTokens) {
     this._token = token;
   }
@@ -40,8 +54,13 @@ export class AuthStore {
     this._user = user;
   }
 
+  setIsLoading(isLoading: boolean) {
+    this._isLoading = isLoading;
+  }
+
   async authenticate() {
-    const { clientId, redirect_uri } = this.authCredentials;
+    this.setIsLoading(true);
+    const {clientId, redirect_uri} = this.authCredentials;
     const codeUri =
       `https://id.twitch.tv/oauth2/authorize?` +
       `client_id=${clientId}&` +
@@ -51,13 +70,16 @@ export class AuthStore {
 
     const code = await this.getCode(codeUri);
     // TODO: extract url to a single place.
-    const { tokens, user }: AuthResponse = await (
+    const {tokens, user}: AuthResponse = await (
       await fetch(
         `https://us-central1-endiny-me.cloudfunctions.net/twitchAuth?code=${code}`
       )
     ).json();
     this.setTokens(tokens);
     this.setUser(user);
+    this.setIsLoading(false);
+
+    localStorage.setItem('creds', JSON.stringify({user, tokens}));
   }
 
   private getCode(uri: string) {
