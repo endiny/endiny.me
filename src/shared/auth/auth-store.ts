@@ -46,11 +46,11 @@ export class AuthStore {
     return this._isLoading;
   }
 
-  setTokens(token: TwitchTokens) {
+  setTokens(token: TwitchTokens | null) {
     this._token = token;
   }
 
-  setUser(user: TwitchUser) {
+  setUser(user: TwitchUser | null) {
     this._user = user;
   }
 
@@ -109,5 +109,18 @@ export class AuthStore {
         }
       }, 500);
     });
+  }
+
+  async logout() {
+    this.setIsLoading(true);
+    this.setTokens(null);
+    this.setUser(null);
+    localStorage.removeItem('creds');
+
+    await new Promise<void>((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+
+    this.setIsLoading(false);
   }
 }
