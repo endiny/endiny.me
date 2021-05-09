@@ -1,0 +1,18 @@
+.space-div {
+  margin: 0 1px;
+}
+
+.user-container {
+  display: inline-flex;
+  padding-left: 10px;
+}
+
+.logo {
+  width: 25px;
+  height: 25px;
+  margin-top: 8px;
+}
+
+.dropdown-item {
+  color: gray !important;
+}

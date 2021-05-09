@@ -1,8 +1,7 @@
 export interface TwitchUser {
-  _id: number;
+  id: number;
   display_name: string;
-  logo: string;
-  name: string;
+  profile_image_url: string;
 }
 
 export interface TwitchTokens {
