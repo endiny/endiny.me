@@ -4,7 +4,7 @@ import {CompletedGamesRoute} from './completed-games/Route';
 import {Home} from './home/Home';
 import {AuthenticateRoute} from './auth/AuthenticateRoute';
 
-enum ROUTES {
+export enum ROUTES {
   HOME = '/',
   COMPLETED_GAMES = '/games',
   AUTH = '/auth',
@@ -12,7 +12,7 @@ enum ROUTES {
 
 export function Routes() {
   return (
-    <BrowserRouter>
+
       <Switch>
         <Route exact path={ROUTES.HOME} component={Home} />
         <Route
@@ -22,6 +22,6 @@ export function Routes() {
         />
         <Route exact path={ROUTES.AUTH} component={AuthenticateRoute} />
       </Switch>
-    </BrowserRouter>
+
   );
 }
