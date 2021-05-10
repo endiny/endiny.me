@@ -15,7 +15,7 @@ const CompletedGames = observer(function CompletedGames(): JSX.Element {
 
   return (
     <div>
-      <div>Games List</div>
+      <h1 className="justify-content-md-center">Games List</h1>
       {completedGamesStore.isFetching ? (
         <Spinner animation="border"/>
       ) : (
