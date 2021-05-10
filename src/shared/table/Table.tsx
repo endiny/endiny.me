@@ -1,7 +1,6 @@
 import React from "react";
 import { TableRow } from "./TableRow";
-import { Table as TableBS } from 'react-bootstrap';
-
+import { Table as BootstrapTable } from 'react-bootstrap';
 
 interface P<T> {
   rows: T[];
@@ -12,7 +11,7 @@ interface P<T> {
 
 export function Table<V>({ rows, columns, templates, keyExtractor }: P<V>): JSX.Element {
   return (
-    <TableBS striped bordered hover>
+    <BootstrapTable striped bordered hover>
       <thead>
         <tr>
           {columns.map((column, index) => (
@@ -27,6 +26,6 @@ export function Table<V>({ rows, columns, templates, keyExtractor }: P<V>): JSX.
 					</tr>
         ))}
       </tbody>
-    </TableBS>
+    </BootstrapTable>
   );
 }
